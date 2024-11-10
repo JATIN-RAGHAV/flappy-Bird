@@ -1,7 +1,7 @@
-export default function Bird({ y, size }) {
+export default function Bird({ y, size, goingUp }) {
   size += 'px';
   const distFromLeft = window.innerWidth / 20
-
+  const rotation = goingUp ? 30 : -30;
   return (
     <>
       <div
@@ -15,6 +15,10 @@ export default function Bird({ y, size }) {
         }}
       >
         <img
+          style={{
+            transform: `rotate(${rotation}deg)`,
+            transition: 'transform 0.5'
+          }}
           width={size}
           height={size}
           src="https://www.svgrepo.com/show/493481/plane.svg"

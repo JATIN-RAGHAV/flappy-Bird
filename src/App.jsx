@@ -100,7 +100,7 @@ function App() {
   return (
     <>
       <Bars width={width} height={barHeight} xPosition1={barXPosition} blankSpaceHeight={blankSpaceHeight} secondBar={true} xPosition2={400} />
-      <Bird y={y} size={size} />
+      <Bird y={y} size={size} goingUp={v < 0} />
     </>
   )
 }
