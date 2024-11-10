@@ -65,7 +65,7 @@ function App() {
     window.addEventListener('keydown', eventHandler);
     const interval = setInterval(() => {
       if (isOver(y, size)) {
-        // resetFunction();
+        resetFunction();
       };
       const distTraveled = (v * timeInterval) + ((1 / 2) * (G) * (timeInterval * timeInterval))
       setV(v => v + (G * timeInterval))
