@@ -62,6 +62,10 @@ function App() {
         setV(-1 * (upArrowVelocity))
       }
     }
+    const clickEventHandler = () => {
+      setV(-1 * upArrowVelocity);
+    }
+    window.addEventListener('click', clickEventHandler);
     window.addEventListener('keydown', eventHandler);
     const interval = setInterval(() => {
       if (isOver(y, size)) {
@@ -82,6 +86,7 @@ function App() {
     return () => {
       clearInterval(interval);
       window.removeEventListener('keydown', eventHandler);
+      window.removeEventListener('click', clickEventHandler);
     }
   }, [v]);
 

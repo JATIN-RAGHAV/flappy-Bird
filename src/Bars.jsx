@@ -1,4 +1,4 @@
-export default function Bars({ height, xPosition1, xPosition2, secondBar, blankSpaceHeight }) {
+export default function Bars({ height, xPosition1, blankSpaceHeight }) {
   let width;
   if (window.innerWidth > 600)
     width = 200
@@ -12,7 +12,6 @@ export default function Bars({ height, xPosition1, xPosition2, secondBar, blankS
       position: 'fixed',
       zIndex: '-1'
     }}
-
   >
     <div
       style={{
