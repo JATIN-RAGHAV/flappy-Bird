@@ -18,7 +18,7 @@ const initialBarHeight = window.innerHeight / 4
 const initialBallPosition = window.innerHeight / 2
 
 const isOver = (birdY, birdSize) => {
-  const isTouchingTop = birdY <= birdSize
+  const isTouchingTop = birdY <= birdSize - 20
   const isTouchingBottom = birdY >= window.innerHeight + 20;
   // const isSmashing;
   if (isTouchingTop || isTouchingBottom)

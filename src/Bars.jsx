@@ -15,7 +15,6 @@ export default function Bars({ height, xPosition1, blankSpaceHeight, width }) {
         width: width,
       }}
     >
-      backgroundColor: '',
     </div>
     <div
       style={{
