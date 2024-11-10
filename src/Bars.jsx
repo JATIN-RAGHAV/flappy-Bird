@@ -1,10 +1,14 @@
-export default function Bars({ height, xPosition }) {
-  const width = 300 + 'px'
-  const blankSpaceHeight = 300;
+export default function Bars({ height, xPosition1, xPosition2, secondBar, blankSpaceHeight }) {
+  let width;
+  if (window.innerWidth > 600)
+    width = 200
+  else
+    width = window.innerWidth / 3;
+  width += 'px'
   const lowerBarHeight = (window.innerHeight - (blankSpaceHeight + height)) + 'px'
   return (<div
     style={{
-      transform: `translateX(${xPosition}px)`,
+      transform: `translateX(${xPosition1}px)`,
       position: 'fixed',
       zIndex: '-1'
     }}
@@ -17,6 +21,7 @@ export default function Bars({ height, xPosition }) {
         width: width,
       }}
     >
+      backgroundColor: '',
     </div>
     <div
       style={{

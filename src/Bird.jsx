@@ -1,17 +1,22 @@
-export default function Bird({ y }) {
+export default function Bird({ y, size }) {
+  size += 'px';
+  const distFromLeft = window.innerWidth / 20
+
   return (
     <>
       <div
         style={{
-          transform: `translateY(${y}px) translateX(140px)`,
-          width: 'fit-content',
+          transformOrigin: 'top right',
+          transform: `translateY(${y - 100}px) translateX(${distFromLeft}px)`,
+          width: size,
+          height: size,
           transition: 'transform 0.01s ease',
           position: 'fixed',
           zIndex: '2',
-          color: 'blue'
+          backgroundColor: 'red',
+          borderRadius: '100%'
         }}
       >
-        XXXXXXX
       </div>
     </>
   )
