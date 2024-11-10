@@ -17,7 +17,7 @@ export default function Bird({ y, size, goingUp }) {
         <img
           style={{
             transform: `rotate(${rotation}deg)`,
-            transition: 'transform 0.5'
+            transition: 'transform 0.5s'
           }}
           width={size}
           height={size}
