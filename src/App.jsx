@@ -1,17 +1,21 @@
 import { useState, useEffect } from 'react'
 import './App.css'
+import Bird from './Bird';
+import Bars from './Bars';
 
 
 function App() {
   const pixelsPerMeter = window.innerHeight / 10
-  const G = pixelsPerMeter * 9.8;
+  const G = pixelsPerMeter * 20;
   const timeInterval = 0.01;
   const [y, setY] = useState(10)
   const [v, setV] = useState(0);
+  const [barHeight, setBarHeight] = useState(500)
+  const [barXPosition, setBarXPosition] = useState(window.innerWidth);
   useEffect(() => {
     const eventHandler = (e) => {
       if (e.key == 'ArrowUp' || e.key == ' ') {
-        setV(-1 * (6 * pixelsPerMeter))
+        setV(-1 * (8 * pixelsPerMeter))
       }
     }
     window.addEventListener('keydown', eventHandler);
@@ -26,6 +30,12 @@ function App() {
         }
         return y
       });
+      if (barXPosition <= -300) {
+        setBarHeight(Math.random() * window.innerHeight * 0.6)
+        setBarXPosition(window.innerWidth);
+      }
+      else
+        setBarXPosition(x => x - 8)
     }, timeInterval * 1000)
     return () => {
       clearInterval(interval);
@@ -33,17 +43,12 @@ function App() {
     }
   }, [v]);
 
+
+
   return (
     <>
-      <div
-        style={{
-          transform: `translateY(${y}px) translateX(140px)`,
-          width: '50px',
-          transition: 'transform 0.01s ease'
-        }}
-      >
-        X
-      </div>
+      <Bars height={barHeight} xPosition={barXPosition} />
+      <Bird y={y} />
     </>
   )
 }
