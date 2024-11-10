@@ -36,7 +36,11 @@ function App() {
   const [barHeight, setBarHeight] = useState(initialBarHeight)
   const [barXPosition, setBarXPosition] = useState(window.innerWidth);
   const minBarHeight = window.innerHeight / 7
-
+  let width;
+  if (window.innerWidth > 600)
+    width = 200
+  else
+    width = window.innerWidth / 3;
 
   const resetFunction = () => {
     console.log(y);
@@ -65,6 +69,7 @@ function App() {
     const clickEventHandler = () => {
       setV(-1 * upArrowVelocity);
     }
+
     window.addEventListener('click', clickEventHandler);
     window.addEventListener('keydown', eventHandler);
     const interval = setInterval(() => {
@@ -76,7 +81,7 @@ function App() {
       setY(y => {
         return (y + distTraveled)
       });
-      if (barXPosition <= -300) {
+      if (barXPosition <= -1 * (width)) {
         setBarHeight(Math.random() * (window.innerHeight - (blankSpaceHeight + (2 * minBarHeight))) + minBarHeight)
         setBarXPosition(window.innerWidth);
       }
@@ -94,7 +99,7 @@ function App() {
 
   return (
     <>
-      <Bars height={barHeight} xPosition1={barXPosition} blankSpaceHeight={blankSpaceHeight} secondBar={true} xPosition2={400} />
+      <Bars width={width} height={barHeight} xPosition1={barXPosition} blankSpaceHeight={blankSpaceHeight} secondBar={true} xPosition2={400} />
       <Bird y={y} size={size} />
     </>
   )

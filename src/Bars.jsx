@@ -1,9 +1,4 @@
-export default function Bars({ height, xPosition1, blankSpaceHeight }) {
-  let width;
-  if (window.innerWidth > 600)
-    width = 200
-  else
-    width = window.innerWidth / 3;
+export default function Bars({ height, xPosition1, blankSpaceHeight, width }) {
   width += 'px'
   const lowerBarHeight = (window.innerHeight - (blankSpaceHeight + height)) + 'px'
   return (<div
