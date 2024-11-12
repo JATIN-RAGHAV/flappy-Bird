@@ -29,7 +29,7 @@ const birdX = window.innerWidth / 20;
 
 const isSmashing = (birdSize, birdY, birdX, barX, barWidth, barHeight, blankSpace) => {
   if (birdX + birdSize >= barX + 10 && birdX < barX + barWidth) {
-    if (birdY <= barHeight - 20 || birdY + birdSize >= barHeight + blankSpace + 20) {
+    if (birdY <= barHeight - 30 || birdY + birdSize >= barHeight + blankSpace + 30) {
       return [true, true];
     }
     return [false, true];
