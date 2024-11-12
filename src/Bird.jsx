@@ -20,7 +20,7 @@ export default function Bird({ birdX, y, size, goingUp }) {
           }}
           width={size}
           height={size}
-          src="https://www.svgrepo.com/show/493481/plane.svg"
+          src="/flappyPlane.svg"
         />
       </div>
     </>

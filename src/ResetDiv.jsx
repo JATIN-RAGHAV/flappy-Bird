@@ -5,6 +5,7 @@ export default function ReestCard({ setOver }) {
       justifyContent: 'center',
       alignItems: 'center',
       height: '100vh',
+      fontFamily: 'Source Code Pro, sans-serif',
     }}>
       <div style={{
         height: window.innerHeight / 2,
@@ -14,17 +15,27 @@ export default function ReestCard({ setOver }) {
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#afafaf',
-        backgroundImage: "url(https://media-cldnry.s-nbcnews.com/image/upload/newscms/2016_36/1703426/ss-160909-911-attack-mbe-630_7.jpg)",
+        backgroundImage: "url(/resetpic.jpg)",
         backgroundSize: 'cover',
+        flexDirection: 'column'
       }}>
         <button onClick={() => setOver(false)} style={{
           background: 'transparent',
           border: 'none',
           fontSize: '40px',
-
         }}>
           Start
         </button>
+        <div style={{
+          padding: '10px',
+          backgroundColor: '#afafaf',
+          borderRadius: '10px',
+          marginTop: '100px',
+          fontWeight: '700',
+          fontSize: '20px',
+        }}>
+          MAX SCORE: 2977
+        </div>
       </div>
     </div>
 
