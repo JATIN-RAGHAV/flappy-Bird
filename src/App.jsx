@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import ResetCard from './ResetDiv';
 import ScoreCard from './ScoreCard';
 import './App.css'
 import Bird from './Bird';
@@ -27,8 +28,8 @@ const initialBallPosition = window.innerHeight / 2
 const birdX = window.innerWidth / 20;
 
 const isSmashing = (birdSize, birdY, birdX, barX, barWidth, barHeight, blankSpace) => {
-  if (birdX + birdSize >= barX && birdX < barX + barWidth) {
-    if (birdY <= barHeight - 20 || birdY + birdSize >= barHeight + blankSpace - 20) {
+  if (birdX + birdSize >= barX + 10 && birdX < barX + barWidth) {
+    if (birdY <= barHeight - 20 || birdY + birdSize >= barHeight + blankSpace + 20) {
       return [true, true];
     }
     return [false, true];
@@ -37,8 +38,8 @@ const isSmashing = (birdSize, birdY, birdX, barX, barWidth, barHeight, blankSpac
 }
 
 const isOver = (birdY, birdSize, birdX, barX, barWidth, barHeight, blankSpace) => {
-  const isTouchingTop = birdY <= 0
-  const isTouchingBottom = birdY + birdSize >= window.innerHeight;
+  const isTouchingTop = birdY <= -30;
+  const isTouchingBottom = birdY + birdSize >= window.innerHeight + 30;
   const [isSmashingBool, isIn] = isSmashing(birdSize, birdY, birdX, barX, barWidth, barHeight, blankSpace)
   if (isTouchingTop || isTouchingBottom || isSmashingBool)
     return [true, isIn]
@@ -57,6 +58,7 @@ function App() {
   const [barXPosition, setBarXPosition] = useState(window.innerWidth);
   const minBarHeight = window.innerHeight / 7
   const [isInBar, setIsInBar] = useState(false);
+  const [over, setOver] = useState(true);
   let width;
   if (window.innerWidth > 600)
     width = 200
@@ -64,7 +66,6 @@ function App() {
     width = window.innerWidth / 3;
 
   const resetFunction = () => {
-    console.log(y);
     setY(initialBallPosition);
     setV(0);
     setScore(0);
@@ -98,7 +99,11 @@ function App() {
     const interval = setInterval(() => {
       const [gameOver, isIn] = isOver(y, size, birdX, barXPosition, width, barHeight, blankSpaceHeight)
       if (gameOver) {
+        setOver(true);
         resetFunction();
+        setY(initialBarHeight);
+        setBarHeight(initialBarHeight);
+        setBarXPosition(window.innerWidth);
       } else {
         if (isIn)
           setIsInBar(true);
@@ -108,6 +113,8 @@ function App() {
             setIsInBar(false);
           }
         }
+      }
+      if (!over) {
         const distTraveled = (v * timeInterval) + ((1 / 2) * (G) * (timeInterval * timeInterval))
         setV(v => v + (G * timeInterval))
         setY(y => {
@@ -129,14 +136,25 @@ function App() {
   }, [v]);
 
 
-
-  return (
-    <>
-      <Bars width={width} height={barHeight} xPosition1={barXPosition} blankSpaceHeight={blankSpaceHeight} secondBar={true} xPosition2={400} />
-      <Bird y={y} birdX={birdX} size={size} goingUp={v < 0} />
-      <ScoreCard score={score} />
-    </>
-  )
+  if (!over) {
+    return (
+      <><div style={{
+        height: '100vh',
+        width: '100vw',
+        position: 'absolute'
+      }}>
+      </div>
+        <Bars width={width} height={barHeight} xPosition1={barXPosition} blankSpaceHeight={blankSpaceHeight} secondBar={true} xPosition2={400} />
+        <Bird y={y} birdX={birdX} size={size} goingUp={v < 0} />
+        <ScoreCard score={score} />
+      </>
+    )
+  }
+  else {
+    return (
+      <ResetCard setOver={setOver} />
+    )
+  }
 }
 
 export default App
