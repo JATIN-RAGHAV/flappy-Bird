@@ -4,6 +4,9 @@ import ScoreCard from './ScoreCard';
 import './App.css'
 import Bird from './Bird';
 import Bars from './Bars';
+import flapSound from '/flap-sound.mp3'
+import pointSound from '/point.mp3'
+import crash from '/crash.mp3'
 
 // Time in which the ball will fall from the top to the ground
 let ballFallTime;
@@ -79,6 +82,18 @@ function App() {
   else
     size = window.innerWidth / 6
 
+  const playCrashSound = () => {
+    new Audio(crash).play();
+  }
+
+  const playFlapSound = () => {
+    new Audio(flapSound).play();
+  }
+
+  const playPointSound = () => {
+    new Audio(pointSound).play();
+  }
+
   if (window.innerHeight > 600)
     blankSpaceHeight = 300;
   else
@@ -88,10 +103,14 @@ function App() {
     const eventHandler = (e) => {
       if (e.key == 'ArrowUp' || e.key == ' ') {
         setV(-1 * (upArrowVelocity))
+        if (!over)
+          playFlapSound();
       }
     }
     const clickEventHandler = () => {
       setV(-1 * upArrowVelocity);
+      if (!over)
+        playFlapSound();
     }
 
     window.addEventListener('click', clickEventHandler);
@@ -100,6 +119,7 @@ function App() {
       const [gameOver, isIn] = isOver(y, size, birdX, barXPosition, width, barHeight, blankSpaceHeight)
       if (gameOver) {
         setOver(true);
+        playCrashSound();
         resetFunction();
         setY(initialBarHeight);
         setBarHeight(initialBarHeight);
@@ -110,6 +130,7 @@ function App() {
         else {
           if (isInBar && !gameOver) {
             setScore(s => s + 1);
+            playPointSound();
             setIsInBar(false);
           }
         }
